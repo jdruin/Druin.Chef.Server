@@ -1,3 +1,3 @@
 # Druin.Chef.Server
 
-Don't trust this code yet.  Not complete
+Nothing to see here.  Move along.
