@@ -222,6 +222,83 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
             return AddUserKeyAsync(username, keyName, publicKey, expirationDate).Result;
         }
 
+        public async Task<KeyModel> DeleteUserKeyAsync(string username, string keyname)
+        {
+
+            try
+            {
+                var fullUrl = baseUrl + username + "/keys/" + keyname;
+
+                var key = await request.DeleteRequestAsync(fullUrl);
+                var content = await key.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<KeyModel>(content);
+                return result;
+            }
+            catch (WebException ex)
+            {
+                throw new ChefExceptionBuilder(conn.UserId, ex);
+            }
+            
+        }
+
+        public KeyModel DeleteUserKey(string username, string keyname)
+        {
+            return DeleteUserKeyAsync(username, keyname).Result;
+        }
+
+        public async Task<KeyModel> GetUserKeyAsync(string username, string keyname)
+        {
+
+            try
+            {
+                var fullUrl = baseUrl + username + "/keys/" + keyname;
+
+                var key = await request.GetRequestAsync(fullUrl);
+                var content = await key.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<KeyModel>(content);
+                return result;
+            }
+            catch (WebException ex)
+            {
+                throw new ChefExceptionBuilder(conn.UserId, ex);
+            }
+            
+        }
+
+        public KeyModel GetUserKey(string username, string keyname)
+        {
+            return GetUserKeyAsync(username, keyname).Result;
+        }
+
+        public async Task<KeyModel> UpdateUserKeyAsync(string username, string keyname, string publicKey, DateTime expirationDate)
+        {
+            try
+            {
+                var fullUrl = baseUrl + username + "/keys/" + keyname;
+
+                dynamic newKey = new ExpandoObject();
+                newKey.name = keyname;
+                newKey.public_key = publicKey;
+                newKey.expiration_date = expirationDate;
+
+                string keyJson = JsonConvert.SerializeObject(newKey);
+                var key = await request.PutRequestAsync(fullUrl, keyJson);
+                var content = await key.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<KeyModel>(content);
+
+                return result;
+            }
+            catch (WebException ex)
+            {
+                throw new ChefExceptionBuilder(conn.UserId, ex);
+            }
+        }
+
+        public KeyModel UpdateUserKey(string username, string keyname, string publicKey, DateTime expirationDate)
+        {
+            return UpdateUserKeyAsync(username, keyname, publicKey, expirationDate).Result;
+        }
+
 
         private async Task<UserModel> NewUser(string url, object newUser)
         {
