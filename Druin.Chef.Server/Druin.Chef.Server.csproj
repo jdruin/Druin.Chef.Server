@@ -51,14 +51,14 @@
     <Compile Include="Server\Global\Models\LicenseModel.cs" />
     <Compile Include="Server\Global\Models\OrganizationModel.cs" />
     <Compile Include="Server\Global\Models\UserModel.cs" />
+    <Compile Include="Server\Organization\Endpoints\AssociationRequests.cs" />
+    <Compile Include="Server\Organization\Models\AssociationRequestModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
-    <Folder Include="Server\Organization\Endpoints\" />
-    <Folder Include="Server\Organization\Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Druin.Chef.Core\Druin.Chef.Core\Druin.Chef.Core.csproj">

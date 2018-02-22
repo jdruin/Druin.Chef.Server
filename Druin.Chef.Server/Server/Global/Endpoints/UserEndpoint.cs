@@ -15,11 +15,11 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 {
     public class UserEndpoint
     {
-        private readonly ChefConnection conn;
+        private readonly IChefConnection conn;
         private readonly string baseUrl;
         private readonly string organization;
-        private readonly Requester request;
-        public UserEndpoint(ChefConnection conn, string organization)
+        private readonly IRequester request;
+        public UserEndpoint(IChefConnection conn, string organization)
         {
             this.conn = conn;
             this.organization = organization;
