@@ -5,6 +5,7 @@ using Druin.Chef.Server.Server.Organization.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -65,11 +66,13 @@ namespace Druin.Chef.Server.Server.Organization.Endpoints
             return GetAssociationRequestsAsync().Result;
         }
 
-         // https://docs.chef.io/api_chef_server.html#association-requests
+        
         //public async Task<AssociationRequestModel> CreateAssociationRequestAsync(string username)
         //{
         //    try
         //    {
+        //        dynamic newAr = new ExpandoObject();
+        //        newAr.name
         //        var ar = await request.PostRequestAsync()
         //    }
         //    catch (Exception)
