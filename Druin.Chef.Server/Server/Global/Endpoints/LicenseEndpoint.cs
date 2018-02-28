@@ -15,14 +15,14 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 {
     public class LicenseEndpoint
     {
-        private readonly IChefConnection conn;
+        private IChefConnection conn;
         private readonly string baseUrl;
         private readonly IRequester request;
-        public LicenseEndpoint(IChefConnection conn, string organization)
+        public LicenseEndpoint(IRequester request, string organization)
         {
-            this.conn = conn;
+            this.conn = request.GetChefConnection();
             this.baseUrl = "/organizations/" + organization + "/license";
-            this.request = new Requester(conn);
+            this.request = request;
         }
 
         public LicenseModel GetLicense()

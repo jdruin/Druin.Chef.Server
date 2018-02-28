@@ -19,12 +19,12 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
         private readonly string baseUrl;
         private readonly string organization;
         private readonly IRequester request;
-        public UserEndpoint(IChefConnection conn, string organization)
+        public UserEndpoint(IRequester request, string organization)
         {
-            this.conn = conn;
+            this.conn = request.GetChefConnection();
             this.organization = organization;
             this.baseUrl = "/users/";
-            this.request = new Requester(conn);
+            this.request = request;
         }
 
         public async Task<Dictionary<string, Uri>> GetUsersAsync()

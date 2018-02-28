@@ -13,16 +13,16 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 {
     public class OrganizationEndpoint
     {
-        private readonly ChefConnection conn;
+        private readonly IChefConnection conn;
         private readonly string baseUrl;
         private readonly string organization;
-        private readonly Requester request;
-        public OrganizationEndpoint(ChefConnection conn, string organization)
+        private readonly IRequester request;
+        public OrganizationEndpoint(IRequester request, string organization)
         {
-            this.conn = conn;
+            this.conn = request.GetChefConnection();
             this.organization = organization;
             this.baseUrl = "/organizations/" ;
-            this.request = new Requester(conn);
+            this.request = request;
         }
 
         public async Task<Dictionary<string, Uri>> GetOrganizationsAsync()

@@ -19,12 +19,12 @@ namespace Druin.Chef.Server.Server.Organization.Endpoints
         private readonly string baseUrl;
         private readonly string organization;
         private readonly IRequester request;
-        public AssociationRequests(IChefConnection conn, string organization)
+        public AssociationRequests(IRequester request, string organization)
         {
-            this.conn = conn;
+            this.conn = request.GetChefConnection();
             this.organization = organization;
             this.baseUrl = "/organizations/" + organization + "/association_requests/";
-            this.request = new Requester(conn);
+            this.request = request;
         }
 
         public async Task<bool> DeleteAssociationRequestAsync(string id)

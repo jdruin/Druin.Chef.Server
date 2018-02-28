@@ -14,9 +14,11 @@ namespace Druin.Chef.Server.Server.Organization.Endpoints
         private readonly IChefConnection conn;
         private readonly string baseUrl;
         private readonly IRequester request;
-        public ClientEndpoint(IChefConnection conn, string organization)
+        public ClientEndpoint(IRequester request, string organization)
         {
-
+            this.conn = request.GetChefConnection();
+            this.baseUrl = "/organizations/" + organization + "/license";
+            this.request = request;
         }
     }
 }

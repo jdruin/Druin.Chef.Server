@@ -18,11 +18,11 @@ namespace Druin.Chef.Server.Server.Organization.Endpoints
         private readonly string baseUrl;
         private readonly IRequester request;
 
-        public AuthenticateUserEndpoint(IChefConnection conn, string organization)
+        public AuthenticateUserEndpoint(IRequester request, string organization)
         {
-            this.conn = conn;
+            this.conn = request.GetChefConnection();
             this.baseUrl = "/organizations/" + organization + "/authenticate_user";
-            this.request = new Requester(conn);
+            this.request = request;
         }
 
         public async Task<bool> CheckAuthenticationAsync(string username, string password)
