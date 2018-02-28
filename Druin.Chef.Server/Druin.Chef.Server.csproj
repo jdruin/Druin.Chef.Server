@@ -55,13 +55,13 @@
     <Compile Include="Server\Organization\Endpoints\AssociationRequests.cs" />
     <Compile Include="Server\Organization\Endpoints\ClientEndpoint.cs" />
     <Compile Include="Server\Organization\Models\AssociationRequestModel.cs" />
+    <Compile Include="Server\Support\KeyHelper.cs" />
+    <Compile Include="Server\Support\RequestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Druin.Chef.Core\Druin.Chef.Core\Druin.Chef.Core.csproj">
       <Project>{822cb221-a617-4ec8-8837-a5d422f3f287}</Project>

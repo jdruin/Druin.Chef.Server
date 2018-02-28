@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Druin.Chef.Core.Authentication;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,10 +13,7 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            var ex = new WebException();
-
-            Console.WriteLine(ex.GetType());
-
+            
             Console.ReadKey();
         }
     }
