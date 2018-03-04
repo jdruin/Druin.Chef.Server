@@ -88,6 +88,23 @@ namespace Druin.Chef.Server.Server.Organization.Endpoints
             return DeleteClientKeyAsync(clientName, keyName).Result;
         }
 
+        public async Task<List<ClientModel>> GetClientsAsync()
+        {
+            var rawClients = await requestHelper.GenericRequest<Dictionary<string, Uri>>(HttpMethod.Get, new Uri(baseUrl));
+            var result = new List<ClientModel>();
+
+            foreach (var rawClient in rawClients)
+            {
+                var client = await requestHelper.GenericRequest<ClientModel>(HttpMethod.Get, rawClient.Value);
+                result.Add(client);
+            }
+            return result;
+        }
+
+        public List<ClientModel> GetClients()
+        {
+            return GetClientsAsync().Result;
+        }
 
     }
 }

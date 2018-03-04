@@ -55,6 +55,7 @@
     <Compile Include="Server\Organization\Endpoints\AssociationRequests.cs" />
     <Compile Include="Server\Organization\Endpoints\ClientEndpoint.cs" />
     <Compile Include="Server\Organization\Models\AssociationRequestModel.cs" />
+    <Compile Include="Server\Organization\Models\ClientModel.cs" />
     <Compile Include="Server\Support\KeyHelper.cs" />
     <Compile Include="Server\Support\RequestHelper.cs" />
   </ItemGroup>
