@@ -2,46 +2,35 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Druin.Chef.Core.Authentication;
 using Druin.Chef.Core.Exceptions;
 using Druin.Chef.Core.Requests;
 using Druin.Chef.Server.Server.Global.Models;
+using Druin.Chef.Server.Server.Support;
 using Newtonsoft.Json;
 
 namespace Druin.Chef.Server.Server.Global.Endpoints
 {
     public class OrganizationEndpoint
     {
-        private readonly IChefConnection conn;
         private readonly string baseUrl;
         private readonly string organization;
-        private readonly IRequester request;
+        private readonly RequestHelper requestHelper;
         public OrganizationEndpoint(IRequester request, string organization)
         {
-            this.conn = request.GetChefConnection();
             this.organization = organization;
             this.baseUrl = "/organizations/" ;
-            this.request = request;
+            this.requestHelper = new RequestHelper(request, organization);
         }
 
         public async Task<Dictionary<string, Uri>> GetOrganizationsAsync()
         {
-            try
-            {
-                var url = baseUrl + organization + "/organizations";
-                var orgs = await request.GetRequestAsync(url);
-                var content = await orgs.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<Dictionary<string, Uri>>(content);
-                return result;
-            }
-            catch (WebException ex)
-            {
+            var fullUrl = baseUrl + organization + "/organizations";
+            var result = await requestHelper.GenericRequest <Dictionary<string, Uri>>(HttpMethod.Get, new Uri(fullUrl));
 
-                throw new ChefExceptionBuilder(conn.UserId, ex);
-            }
-
-            
+            return result;            
         }
 
         public Dictionary<string, Uri> GetOrganizations()
@@ -51,24 +40,12 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 
         public async Task<OrganizationModel> CreateOrganizationAsync(string name, string fullName)
         {
+            dynamic newOrg = new ExpandoObject();
+            newOrg.name = name;
+            newOrg.full_name = fullName;
 
-            try
-            {
-                dynamic newOrg = new ExpandoObject();
-                newOrg.name = name;
-                newOrg.full_name = fullName;
-
-                var orgJson = JsonConvert.SerializeObject(newOrg);
-                var org = await request.PostRequestAsync(baseUrl, orgJson);
-                var content = await org.Content.ReadAsStringAsync();
-
-                var result = JsonConvert.DeserializeObject<OrganizationModel>(content);
-                return result;
-            }
-            catch (WebException ex)
-            {
-                throw new ChefExceptionBuilder(conn.UserId, ex);
-            }
+            var result = await requestHelper.GenericRequest<OrganizationModel>(HttpMethod.Post, newOrg, new Uri(baseUrl));
+            return result;
             
         }
 
@@ -79,19 +56,9 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 
         public async Task<OrganizationModel> DeleteOrganizationAsync(string name)
         {
-            try
-            {
-                var fullUrl = baseUrl + name;
-                var org = await request.DeleteRequestAsync(fullUrl);
-                var content = await org.Content.ReadAsStringAsync();
-
-                var result = JsonConvert.DeserializeObject<OrganizationModel>(content);
-                return result;
-            }
-            catch (WebException ex)
-            {
-                throw new ChefExceptionBuilder(conn.UserId, ex);
-            }
+            var fullUrl = baseUrl + name;
+            var result = await requestHelper.GenericRequest<OrganizationModel>(HttpMethod.Delete, new Uri(baseUrl));
+            return result;
         }
 
         public OrganizationModel DeleteOrganization(string name)
@@ -101,20 +68,9 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 
         public async Task<OrganizationModel> GetOrganizationAsync(string name)
         {
-            try
-            {
-                var fullUrl = baseUrl + name;
-                var org = await request.GetRequestAsync(fullUrl);
-                var content = await org.Content.ReadAsStringAsync();
-
-                var result = JsonConvert.DeserializeObject<OrganizationModel>(content);
-                return result;
-            }
-            catch (WebException ex )
-            {
-                throw new ChefExceptionBuilder(conn.UserId, ex);
-            }
-
+            var fullUrl = baseUrl + name;
+            var result = await requestHelper.GenericRequest<OrganizationModel>(HttpMethod.Get, new Uri(fullUrl));
+            return result;
         }
 
         public OrganizationModel GetOrganization(string name)
@@ -124,25 +80,15 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 
         public async Task<OrganizationModel> UpdateOrganizationAsync(string name, string fullName)
         {
-            try
-            {
-                dynamic newOrg = new ExpandoObject();
-                newOrg.name = name;
-                newOrg.full_name = fullName;
+            dynamic newOrg = new ExpandoObject();
+            newOrg.name = name;
+            newOrg.full_name = fullName;
 
-                var fullUrl = baseUrl + name;
+            var fullUrl = baseUrl + name;
 
-                var orgJson = JsonConvert.SerializeObject(newOrg);
-                var org = await request.PutRequestAsync(fullUrl, orgJson);
-                var content = await org.Content.ReadAsStringAsync();
+            var result = await requestHelper.GenericRequest<OrganizationModel>(HttpMethod.Put, newOrg, new Uri(fullUrl));
+            return result;
 
-                var result = JsonConvert.DeserializeObject<OrganizationModel>(content);
-                return result;
-            }
-            catch (WebException ex)
-            {
-                throw new ChefExceptionBuilder(conn.UserId, ex);
-            }
         }
 
         public OrganizationModel UpdateOrganization(string name, string fullName)

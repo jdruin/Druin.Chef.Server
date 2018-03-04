@@ -24,6 +24,11 @@ namespace Druin.Chef.Server.Server.Support
             this.organization = organization;
         }
 
+        public IRequester RequestObject()
+        {
+            return request;
+        }
+
         public async Task<T>GenericRequest<T>(HttpMethod method, object submitObject, Uri endpoint, string parameters ="")
         {
             try

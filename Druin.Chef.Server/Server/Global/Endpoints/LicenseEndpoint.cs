@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Druin.Chef.Core;
@@ -9,20 +10,20 @@ using Druin.Chef.Core.Authentication;
 using Druin.Chef.Core.Exceptions;
 using Druin.Chef.Core.Requests;
 using Druin.Chef.Server.Server.Global.Models;
+using Druin.Chef.Server.Server.Support;
 using Newtonsoft.Json;
 
 namespace Druin.Chef.Server.Server.Global.Endpoints
 {
     public class LicenseEndpoint
     {
-        private IChefConnection conn;
         private readonly string baseUrl;
-        private readonly IRequester request;
+        private readonly RequestHelper requestHelper;
         public LicenseEndpoint(IRequester request, string organization)
         {
-            this.conn = request.GetChefConnection();
             this.baseUrl = "/organizations/" + organization + "/license";
-            this.request = request;
+            this.requestHelper = new RequestHelper(request, organization);
+
         }
 
         public LicenseModel GetLicense()
@@ -33,20 +34,8 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 
         public async Task<LicenseModel> GetLicenseAsync()
         {
-            try
-            {
-                var license = await request.GetRequestAsync(baseUrl);
-                var content = await license.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<LicenseModel>(content);
-                return result;
-            }
-            catch (WebException ex)
-            {
-
-                throw new ChefExceptionBuilder(conn.UserId, ex);
-            }
-
-            
+            var result = await requestHelper.GenericRequest<LicenseModel>(HttpMethod.Get, new Uri(baseUrl));
+            return result;
         }
     }
 }

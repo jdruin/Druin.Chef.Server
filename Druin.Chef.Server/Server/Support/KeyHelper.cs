@@ -25,7 +25,7 @@ namespace Druin.Chef.Server.Server.Support
             this.request = request;
         }
 
-        public async Task<KeyModel> BuildFullKeyModel(Uri keyUri)
+        public async Task<KeyModel> RetrieveFullKeyModel(Uri keyUri)
         {
 
             try
