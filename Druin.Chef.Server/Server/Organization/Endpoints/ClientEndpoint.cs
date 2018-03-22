@@ -106,5 +106,67 @@ namespace Druin.Chef.Server.Server.Organization.Endpoints
             return GetClientsAsync().Result;
         }
 
+        public async Task<ClientModel> CreateClientAsync(string name, bool createKey )
+        {
+            dynamic newClient = new ExpandoObject();
+            newClient.name = name;
+            newClient.create_key = createKey;
+
+            var result = await requestHelper.GenericRequest<ClientModel>(HttpMethod.Post, newClient, new Uri(baseUrl));
+            return result;
+        }
+
+        public ClientModel CreateClient(string name, bool createKey)
+        {
+            return CreateClientAsync(name, createKey).Result;
+        }
+
+        public async Task<ClientModel> DeleteClientAsync(string clientName)
+        {
+            var fullUrl = baseUrl + clientName;
+
+            var result = await requestHelper.GenericRequest<ClientModel>(HttpMethod.Delete, new Uri(fullUrl));
+            return result;
+        }
+
+        public ClientModel DeleteClient(string clientName)
+        {
+            return DeleteClientAsync(clientName).Result;
+        }
+
+        public async Task<ClientModel> GetClientAsync(string clientName)
+        {
+            var fullUrl = baseUrl + clientName;
+
+            var result = await requestHelper.GenericRequest<ClientModel>(HttpMethod.Get, new Uri(fullUrl));
+            return result;
+        }
+
+        public ClientModel GetCLient(string clientName)
+        {
+            return GetClientAsync(clientName).Result;
+        }
+
+        public async Task<ClientModel> UpdateClientNameAsync(string currentName, string newName)
+        {
+            var fullUrl = baseUrl + currentName;
+
+            dynamic newClient = new ExpandoObject();
+            newClient.name = newName;
+
+            var updatedClient = await requestHelper.GenericRequest<Uri>(HttpMethod.Put, newClient, new Uri(fullUrl));
+
+            var result = await requestHelper.GenericRequest<ClientModel>(HttpMethod.Get, new Uri(baseUrl + newName));
+
+            result.uri = new Uri(baseUrl + newName);
+
+            return result;
+        }
+
+        public ClientModel UpdateClientName(string currentName, string newName)
+        {
+            return UpdateClientNameAsync(currentName, newName).Result;
+        }
+
     }
 }

@@ -54,6 +54,8 @@
     <Compile Include="Server\Global\Models\UserModel.cs" />
     <Compile Include="Server\Organization\Endpoints\AssociationRequests.cs" />
     <Compile Include="Server\Organization\Endpoints\ClientEndpoint.cs" />
+    <Compile Include="Server\Organization\Endpoints\ContainerEndpoint.cs" />
+    <Compile Include="Server\Organization\Endpoints\CookbookEndpoint.cs" />
     <Compile Include="Server\Organization\Models\AssociationRequestModel.cs" />
     <Compile Include="Server\Organization\Models\ClientModel.cs" />
     <Compile Include="Server\Support\KeyHelper.cs" />
