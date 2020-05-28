@@ -9,11 +9,11 @@ using Druin.Chef.Core;
 using Druin.Chef.Core.Authentication;
 using Druin.Chef.Core.Exceptions;
 using Druin.Chef.Core.Requests;
-using Druin.Chef.Server.Server.Global.Models;
-using Druin.Chef.Server.Server.Support;
+using Druin.Chef.Server.Global.Models;
+using Druin.Chef.Server.Support;
 using Newtonsoft.Json;
 
-namespace Druin.Chef.Server.Server.Global.Endpoints
+namespace Druin.Chef.Server.Global.Endpoints
 {
     public class LicenseEndpoint
     {
@@ -28,8 +28,8 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 
         public LicenseModel GetLicense()
         {
-           return GetLicenseAsync().Result;
-            
+            return GetLicenseAsync().Result;
+
         }
 
         public async Task<LicenseModel> GetLicenseAsync()

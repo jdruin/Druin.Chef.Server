@@ -5,16 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Druin.Chef.Server.Server.Global.Models;
+using Druin.Chef.Server.Global.Models;
 using Newtonsoft.Json;
-using Druin.Chef.Server.Server.Organization.Models;
+using Druin.Chef.Server.Organization.Models;
 using System.Net;
 using Druin.Chef.Core.Exceptions;
 using System.Dynamic;
-using Druin.Chef.Server.Server.Support;
+using Druin.Chef.Server.Support;
 using System.Net.Http;
 
-namespace Druin.Chef.Server.Server.Organization.Endpoints
+namespace Druin.Chef.Server.Organization.Endpoints
 {
     public class ClientEndpoint
     {
@@ -66,7 +66,7 @@ namespace Druin.Chef.Server.Server.Organization.Endpoints
             var fullKey = await keyHelper.RetrieveFullKeyModel(result.uri);
 
             return fullKey;
-            
+
         }
 
         public KeyModel CreateClientKey(string clientName, string keyName, string publicKey, DateTime expirationDate)
@@ -80,7 +80,7 @@ namespace Druin.Chef.Server.Server.Organization.Endpoints
 
             var result = await requestHelper.GenericRequest<KeyModel>(HttpMethod.Delete, new Uri(fullUrl));
             return result;
-            
+
         }
 
         public KeyModel DeleteClientKey(string clientName, string keyName)
@@ -106,7 +106,7 @@ namespace Druin.Chef.Server.Server.Organization.Endpoints
             return GetClientsAsync().Result;
         }
 
-        public async Task<ClientModel> CreateClientAsync(string name, bool createKey )
+        public async Task<ClientModel> CreateClientAsync(string name, bool createKey)
         {
             dynamic newClient = new ExpandoObject();
             newClient.name = name;

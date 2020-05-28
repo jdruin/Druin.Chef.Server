@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Druin.Chef.Server.Server.Organization.Models
+namespace Druin.Chef.Server.Organization.Models
 {
     public class AssociationRequestModel
     {

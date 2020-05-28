@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Druin.Chef.Server.Server.Support
+namespace Druin.Chef.Server.Support
 {
     internal class RequestHelper
     {
@@ -29,7 +29,7 @@ namespace Druin.Chef.Server.Server.Support
             return request;
         }
 
-        public async Task<T>GenericRequest<T>(HttpMethod method, object submitObject, Uri endpoint, string parameters ="")
+        public async Task<T> GenericRequest<T>(HttpMethod method, object submitObject, Uri endpoint, string parameters = "")
         {
             try
             {
@@ -54,13 +54,13 @@ namespace Druin.Chef.Server.Server.Support
                     default:
                         throw new NotSupportedException(method.Method.ToString() + "is not supported");
                 }
-                
+
 
                 var result = JsonConvert.DeserializeObject<T>(content);
 
                 return result;
 
-                
+
 
             }
             catch (WebException ex)
@@ -105,7 +105,7 @@ namespace Druin.Chef.Server.Server.Support
         {
             try
             {
-                
+
                 HttpResponseMessage finishedRequest;
                 string content;
                 switch (method.Method.ToString())
@@ -122,7 +122,7 @@ namespace Druin.Chef.Server.Server.Support
                             content = await finishedRequest.Content.ReadAsStringAsync();
                             break;
                         }
-                    
+
                     default:
                         throw new NotSupportedException(method.Method.ToString() + "is not supported");
                 }

@@ -1,8 +1,8 @@
 ﻿using Druin.Chef.Core.Authentication;
 using Druin.Chef.Core.Exceptions;
 using Druin.Chef.Core.Requests;
-using Druin.Chef.Server.Server.Global.Models;
-using Druin.Chef.Server.Server.Support;
+using Druin.Chef.Server.Global.Models;
+using Druin.Chef.Server.Support;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Druin.Chef.Server.Server.Global.Endpoints
+namespace Druin.Chef.Server.Global.Endpoints
 {
     public class UserEndpoint
     {
@@ -62,7 +62,7 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
             var result = await requestHelper.GenericRequest<UserModel>(HttpMethod.Post, newUser, fullUrl);
             return result;
 
-       
+
         }
         public UserModel CreateUser(string username, string display_name, string email, string first_name, string last_name, string password, string public_key, string middle_name = "")
         {
@@ -132,15 +132,15 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 
         public async Task<KeyModel> AddUserKeyAsync(string username, string keyName, string publicKey, DateTime expirationDate)
         {
-                var fullUrl = baseUrl + username + "/keys/";
+            var fullUrl = baseUrl + username + "/keys/";
 
-                dynamic newKey = new ExpandoObject();
-                newKey.name = keyName;
-                newKey.public_key = publicKey;
-                newKey.expiration_date = expirationDate;
+            dynamic newKey = new ExpandoObject();
+            newKey.name = keyName;
+            newKey.public_key = publicKey;
+            newKey.expiration_date = expirationDate;
 
-                var result = await requestHelper.GenericRequest<KeyModel>(HttpMethod.Post, newKey, new Uri(fullUrl));
-                return result;            
+            var result = await requestHelper.GenericRequest<KeyModel>(HttpMethod.Post, newKey, new Uri(fullUrl));
+            return result;
         }
 
         public KeyModel AddUserKey(string username, string keyName, string publicKey, DateTime expirationDate)
@@ -153,7 +153,7 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
             var fullUrl = baseUrl + username + "/keys/" + keyname;
             var result = await requestHelper.GenericRequest<KeyModel>(HttpMethod.Delete, new Uri(fullUrl));
             return result;
-                       
+
         }
 
         public KeyModel DeleteUserKey(string username, string keyname)
@@ -166,8 +166,8 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
             var fullUrl = baseUrl + username + "/keys/" + keyname;
             var result = await requestHelper.GenericRequest<KeyModel>(HttpMethod.Get, new Uri(fullUrl));
             return result;
-            
-            
+
+
         }
 
         public KeyModel GetUserKey(string username, string keyname)
@@ -195,7 +195,7 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
         }
 
 
-        
+
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Druin.Chef.Core.Authentication;
 using Druin.Chef.Core.Exceptions;
 using Druin.Chef.Core.Requests;
-using Druin.Chef.Server.Server.Organization.Models;
+using Druin.Chef.Server.Organization.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Druin.Chef.Server.Server.Organization.Endpoints
+namespace Druin.Chef.Server.Organization.Endpoints
 {
     public class AssociationRequests
     {
@@ -66,7 +66,7 @@ namespace Druin.Chef.Server.Server.Organization.Endpoints
             return GetAssociationRequestsAsync().Result;
         }
 
-        
+
         //public async Task<AssociationRequestModel> CreateAssociationRequestAsync(string username)
         //{
         //    try

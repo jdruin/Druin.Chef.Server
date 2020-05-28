@@ -10,7 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Druin.Chef.Server.Server.Organization.Endpoints
+namespace Druin.Chef.Server.Organization.Endpoints
 {
     public class AuthenticateUserEndpoint
     {

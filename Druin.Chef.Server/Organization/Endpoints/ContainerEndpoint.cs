@@ -1,5 +1,5 @@
 ﻿using Druin.Chef.Core.Requests;
-using Druin.Chef.Server.Server.Support;
+using Druin.Chef.Server.Support;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Druin.Chef.Server.Server.Organization.Endpoints
+namespace Druin.Chef.Server.Organization.Endpoints
 {
     public class ContainerEndpoint
     {

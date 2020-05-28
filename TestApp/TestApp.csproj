@@ -50,12 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Druin.Chef.Core\Druin.Chef.Core\Druin.Chef.Core.csproj">
-      <Project>{822cb221-a617-4ec8-8837-a5d422f3f287}</Project>
+      <Project>{e6c9c916-73d3-4c02-9107-9d6a1e7330c4}</Project>
       <Name>Druin.Chef.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Druin.Chef.Server\Druin.Chef.Server.csproj">
-      <Project>{f97b4b05-9577-476b-821f-3c605e57e968}</Project>
-      <Name>Druin.Chef.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

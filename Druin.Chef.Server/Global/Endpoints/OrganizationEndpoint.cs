@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Druin.Chef.Core.Authentication;
 using Druin.Chef.Core.Exceptions;
 using Druin.Chef.Core.Requests;
-using Druin.Chef.Server.Server.Global.Models;
-using Druin.Chef.Server.Server.Support;
+using Druin.Chef.Server.Global.Models;
+using Druin.Chef.Server.Support;
 using Newtonsoft.Json;
 
-namespace Druin.Chef.Server.Server.Global.Endpoints
+namespace Druin.Chef.Server.Global.Endpoints
 {
     public class OrganizationEndpoint
     {
@@ -21,16 +21,16 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
         public OrganizationEndpoint(IRequester request, string organization)
         {
             this.organization = organization;
-            this.baseUrl = "/organizations/" ;
+            this.baseUrl = "/organizations/";
             this.requestHelper = new RequestHelper(request, organization);
         }
 
         public async Task<Dictionary<string, Uri>> GetOrganizationsAsync()
         {
             var fullUrl = baseUrl + organization + "/organizations";
-            var result = await requestHelper.GenericRequest <Dictionary<string, Uri>>(HttpMethod.Get, new Uri(fullUrl));
+            var result = await requestHelper.GenericRequest<Dictionary<string, Uri>>(HttpMethod.Get, new Uri(fullUrl));
 
-            return result;            
+            return result;
         }
 
         public Dictionary<string, Uri> GetOrganizations()
@@ -46,7 +46,7 @@ namespace Druin.Chef.Server.Server.Global.Endpoints
 
             var result = await requestHelper.GenericRequest<OrganizationModel>(HttpMethod.Post, newOrg, new Uri(baseUrl));
             return result;
-            
+
         }
 
         public OrganizationModel CreateOrganization(string name, string fullName)

@@ -1,7 +1,7 @@
 ﻿using Druin.Chef.Core.Authentication;
 using Druin.Chef.Core.Exceptions;
 using Druin.Chef.Core.Requests;
-using Druin.Chef.Server.Server.Global.Models;
+using Druin.Chef.Server.Global.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Druin.Chef.Server.Server.Support
+namespace Druin.Chef.Server.Support
 {
     internal class KeyHelper
     {
@@ -41,7 +41,7 @@ namespace Druin.Chef.Server.Server.Support
             {
                 throw new ChefExceptionBuilder(conn.UserId, ex);
             }
-            
+
         }
     }
 }
